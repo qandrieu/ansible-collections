@@ -1,0 +1,26 @@
+---
+- hosts: all
+  become: true
+  
+  tasks:
+
+    - import_role:
+        name: provision.lemp.setup
+
+    - import_role:
+        name: provision.lemp.mariadb
+
+    - import_role:
+        name: provision.lemp.php
+
+    - import_role:
+        name: provision.lemp.nginx
+
+    - import_role:
+        name: provision.lemp.composer
+
+    - import_role:
+        name: provision.lemp.yarn
+
+    - import_role:
+        name: provision.lemp.nodejs

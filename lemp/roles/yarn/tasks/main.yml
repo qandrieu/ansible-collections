@@ -1,0 +1,21 @@
+---
+- name: Add Yarn gpg key
+  apt_key:
+    url: 'https://dl.yarnpkg.com/debian/pubkey.gpg'
+    state: present
+
+- name: Add Yarn to the source lists
+  lineinfile:
+    path: '/etc/apt/sources.list.d/yarn.list'
+    regexp: 'deb https://dl.yarnpkg.com/debian/ stable main'
+    line: 'deb https://dl.yarnpkg.com/debian/ stable main'
+    create: yes
+
+- name: Update repositories
+  apt: update_cache=yes
+
+- name: Install Yarn package manager
+  apt:
+    name: yarn
+    state: latest
+    update_cache: yes

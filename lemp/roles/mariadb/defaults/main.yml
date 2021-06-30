@@ -1,0 +1,6 @@
+---
+distro: ubuntu
+distro_version: bionic
+maria_db_version: "10.5"
+maria_db_key: "0xF1656F24C74CD1D8"
+maria_db_repo: "deb [arch=amd64,arm64,ppc64el] http://mariadb.mirrors.ovh.net/MariaDB/repo/{{ maria_db_version }}/{{ distro }} {{ distro_version }} main"

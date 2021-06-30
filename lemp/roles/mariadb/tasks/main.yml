@@ -1,0 +1,40 @@
+---
+- name: Add MariaDB gpg key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: "{{ maria_db_key }}"
+
+- name: Install repository MariaDB
+  apt_repository:
+    repo: "{{ maria_db_repo }}"
+    state: present
+    update_cache: yes
+
+- name: Update repositories
+  apt: update_cache=yes
+
+- name: Install MariaDB & mysql-python
+  apt: name={{ item }} state=latest update_cache=yes
+  loop: [ 'mariadb-server', 'python3-pymysql' ]
+
+# MariaDB Configuration
+- name: Sets the root password
+  mysql_user:
+    name: root
+    password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  no_log: true
+
+- name: Removes all anonymous user accounts
+  mysql_user:
+    name: ''
+    host_all: yes
+    state: absent
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  no_log: true
+
+- name: Removes MySQL test database
+  mysql_db:
+    name: test
+    state: absent
+    login_unix_socket: /var/run/mysqld/mysqld.sock

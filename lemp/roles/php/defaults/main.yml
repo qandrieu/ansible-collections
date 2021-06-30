@@ -1,0 +1,11 @@
+---
+php_version: "7.4"
+php_packages: [ "php{{ php_version }}-mbstring",
+        "php{{ php_version }}-bcmath",
+        "php{{ php_version }}-xml",
+        "php{{ php_version }}-curl",
+        "php{{ php_version }}-zip" ]
+php_file_uploads: "On"
+php_upload_max_filesize: "64M"
+php_max_file_uploads: "20"
+php_post_max_size: "32M"
