@@ -6,21 +6,28 @@
 
     - import_role:
         name: provision.lemp.setup
+      tags: ['setup']
 
     - import_role:
         name: provision.lemp.mariadb
+      tags: ['mysql', 'mariadb', 'db', 'lemp']
 
     - import_role:
         name: provision.lemp.php
+      tags: ['php', 'web', 'php-fpm', 'lemp']
 
     - import_role:
         name: provision.lemp.nginx
+      tags: ['nginx', 'web', 'http', 'lemp']
 
     - import_role:
         name: provision.lemp.composer
+      tags: ['composer']
 
     - import_role:
         name: provision.lemp.yarn
+      tags: ['yarn']
 
     - import_role:
         name: provision.lemp.nodejs
+      tags: ['nodejs', 'node']

@@ -16,5 +16,5 @@
 - name: Install NodeJS
   apt:
     name: nodejs
-    state: present
+    state: latest
     update_cache: yes
