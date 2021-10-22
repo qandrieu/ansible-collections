@@ -1,0 +1,41 @@
+---
+  - name: Install dependencies - {{ ansible_distribution|lower }}/{{ ansible_distribution_release }}
+    apt:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - 'apt-transport-https'
+      - 'ca-certificates'
+  
+  - name: Add docker apt key
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+  
+  - name: Add docker apt repository
+    apt_repository:
+      repo: "{{ docker_apt_repository }}"
+      update_cache: yes
+  
+  - name: Install docker-ce {{ docker_version }}
+    apt: 
+      name: "docker-ce={{ docker_version }}"
+      state: present
+  
+  - name: Add users to group docker
+    user:
+      name: "{{ item }}"
+      groups: docker
+      append: yes
+    with_items: "{{ docker_group_members }}"
+    when: docker_group_members is defined
+
+  - name: Install python3-pip
+    apt:
+      name: python3-pip
+      state: present
+
+  - name: Install docker compose {{ docker_compose_version }}
+    pip:
+      name: docker-compose
+      version: "{{ docker_compose_version }}"

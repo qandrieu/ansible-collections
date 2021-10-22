@@ -1,0 +1,9 @@
+---
+- hosts: 'all'
+  become: true
+
+  tasks:
+
+    - import_role:
+        name: provision.docker.daemon
+      tags: ['dameon', 'install', 'docker' ]
