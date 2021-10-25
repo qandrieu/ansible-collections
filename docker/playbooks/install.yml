@@ -6,4 +6,8 @@
 
     - import_role:
         name: provision.docker.daemon
-      tags: ['dameon', 'install', 'docker' ]
+      tags: ['daemon', 'install', 'docker' ]
+
+    - import_role:
+        name: provision.docker.pull_images
+      tags: ['images', 'install', 'pull', 'docker' ]
