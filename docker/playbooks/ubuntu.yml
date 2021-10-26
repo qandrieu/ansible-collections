@@ -1,0 +1,17 @@
+---
+- hosts: 'all'
+  become: true
+
+  tasks:
+
+    - import_role:
+        name: provision.docker.daemon
+      tags: ['daemon', 'docker' ]
+
+    - import_role:
+        name: provision.docker.pull
+      tags: ['images', 'pull', 'docker' ]
+
+    - import_role:
+        name: provision.docker.pull_private
+      tags: ['images', 'pull', 'docker', 'private', 'registry' ]

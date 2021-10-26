@@ -2,6 +2,6 @@
 php_version: "7.4"
 http_conf: laravel-app
 http_port: "80"
-http_host: "{{ ansible_facts.ens4.ipv4.address }}"
+http_host: "{{ ansible_default_ipv4.address }}"
 document_root: /var/www/html
 

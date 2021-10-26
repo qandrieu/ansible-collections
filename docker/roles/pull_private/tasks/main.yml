@@ -1,0 +1,23 @@
+---
+  - name: Log in to registry {{ registry }}
+    docker_login:
+      registry: "{{ item }}"
+      username: "{{ login }}"
+      password: "{{ password }}"
+    with_items : "{{ registry }}"
+    when: 
+      - private_images is defined
+      - registry is defined
+      - login is defined
+      - password is defined
+ 
+  - name: Pull private images {{ private_images }}
+    docker_image:
+      name: "{{ item }}"
+      source: pull
+    with_items: "{{ private_images }}"
+    when: private_images is defined
+   
+  - name: Log out to {{ registry }}
+    docker_login:
+      state: absent

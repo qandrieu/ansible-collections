@@ -1,0 +1,8 @@
+---
+
+  - name: Pull docker hub images {{ images }}
+    docker_image:
+      name: "{{ item }}"
+      source: pull
+    with_items: "{{ images }}"
+    when: images is defined
